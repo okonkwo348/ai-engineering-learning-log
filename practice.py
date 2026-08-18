@@ -56,3 +56,114 @@ print(digit)
 print(max(digit))
 print(min(digit))
 print(sum(digit))
+
+
+square = [value**2 for value in range(1,11)]
+print(square)
+
+
+# copying a list
+my_foods = ['pizza', 'falafel', 'carrot cake']
+friend_foods = my_foods
+
+my_foods.append("cannoli")
+friend_foods.append("ice cream")
+
+print("My favorite foods are:")
+print(my_foods)
+
+print("\nMy friend's favorite foods are:")
+print(friend_foods)
+
+
+#Tuple
+dimensions = (200, 50)
+for i in dimensions:
+    print(i)
+
+# to print the index of a tuple
+print(dimensions.index(50))
+    
+
+
+#If statement
+car = 'subaru'
+print(car == "subaru")
+
+print(car == "audi")
+
+
+# Diction
+
+alien_0 = {"color": "green", "points" : 5}
+
+print("\n" + alien_0['color'])
+# accessing a dictionary using get() method
+print(alien_0.get('poin', "doesn't exixt"))
+
+
+alien_0["X_cordinate"] = True
+alien_0["Z_cordinate"] = True
+alien_0["Y_cordinate"] = False
+print(f"\n  {alien_0}") 
+
+#deleting a key-value in a dic
+del alien_0["color"]
+print(f"\n  {alien_0}") 
+
+# Looping Through a Dictionary’s Keys using keys() method
+for i in alien_0.keys():
+    print(i)
+
+print()
+
+#OR
+
+for i in alien_0:
+    print(i)
+
+print()
+# Looping Through a Dictionary’s Keys in a Particular Order
+for i in sorted(alien_0):
+    print(i)
+
+print()
+# Looping Through All Values in a Dictionary using value() method
+for i in alien_0.values():
+    print(i)
+print()
+
+#The set() method prevent duplicate
+for i in set(alien_0.values()):
+    print(i)
+
+# A List of Dictionaries
+aliens = []
+for alien_number in range(10):
+    new_alien = {'color': 'green', 'points': 5, 'speed': 'slow'}
+    aliens.append(new_alien)
+
+for alien in aliens[:3]:
+    if alien["color"] == "green":
+        alien["color"] = "yellow"
+        alien['speed'] = 'medium'
+        alien['points'] = 10
+    elif alien['color'] == 'yellow':
+        alien['color'] = 'red'
+        alien['speed'] = 'fast'
+        alien['point'] =15
+
+for alien in aliens[:5]:
+    print(alien)
+
+
+# A List in a Dictionary
+pizza = {
+ 'crust': 'thick',
+ 'toppings': ['mushrooms', 'extra cheese'],
+ }
+
+for liz in pizza["toppings"]:
+    print(liz)
+
+

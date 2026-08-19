@@ -167,3 +167,68 @@ for liz in pizza["toppings"]:
     print(liz)
 
 
+
+users = {
+ 'aeinstein': {
+ 'first': 'albert',
+ 'last': 'einstein',
+ 'location': 'princeton',
+ },
+ 'mcurie': {
+ 'first': 'marie',
+ 'last': 'curie',
+ 'location': 'paris',
+ },
+ }
+
+# A Dictionary in a Dictionary
+# Summary of the RuleUse .items() if you want both the key and value at the same time using two variables (for k, v in dict.items()).
+# Drop .items() if you only want the key using one variable (for k in dict).
+
+for username, user_info in users.items():
+    print(f"\nUsername: {username}")
+    full_name = f"{user_info["first"]} {user_info["last"]}"
+    location = user_info['location']
+    print(f"\tFull name: {full_name.title()}")
+    print(f"\tLocation: {location.title()}")
+    print()
+
+    #USER INPUT 
+name = input("Please enter your name: ")
+print(f"Hello, {name}")
+
+prompt = "If you share your name, we can personalize the messages you see."
+prompt += "\nWhat is your first name? "
+
+name = input(prompt)
+
+print(f"\nHello, {name}")
+
+# Using int() to Accept Numerical Input
+age = input("How old are? ")
+
+height = input("How tall are you, in inches? ")
+height = int(height)
+
+if height >= 48:
+    print("\nYou're tall enough to ride!")
+else:
+    print("\nYou'll be able to ride when you' re a little older.")
+
+
+# while Loops
+current_number = 1
+while current_number <= 5:
+    print(current_number)
+    current_number+=1
+
+prompt = "\nTell me something, and I will repeat it back to you:"
+prompt += "\nEnter 'quit' to end the program. "
+
+message = ""
+while message != "quit":
+    message = input(prompt)
+    if message != 'quit':
+        print(message)
+
+

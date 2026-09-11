@@ -25,6 +25,22 @@ ai-engineering-learning-log/
 │   ├── first_api_call.py
 │   ├── error_handling.py
 │   └── reusable_fetch_function.py
+├── 04_classes/
+│   └── api_response_class.py
+├── 05_professional_python/
+│   └── gemini_lesson/
+│       ├── README.md
+│       ├── requirements.txt
+│       ├── .env.example
+│       ├── check_env.py
+│       └── ask_gemini.py
+├── 06_advanced_python/
+│   ├── strings_and_slicing.py
+│   ├── tuples_and_sets.py
+│   ├── comprehensions.py
+│   ├── exceptions_in_depth.py
+│   ├── file_handling.py
+│   └── iterators_and_generators.py
 ```
 
 ## Topics Covered So Far
@@ -35,6 +51,22 @@ ai-engineering-learning-log/
   variable isn't updated on every path
 - **APIs & Networking** — `requests`, JSON parsing, HTTP status codes, error handling with
   `try`/`except`, building a reusable, failure-safe API-calling function
+- **Classes** — bundling data (attributes) and behavior (methods) together, `__init__`, `self`
+- **Professional Python practices** — virtual environments, `.env` secrets management with
+  `python-dotenv`, and structured `logging` instead of `print()`
+- **Real LLM API integration** — calling Google's Gemini API (`google-genai`) with proper
+  authentication, a reusable failure-safe function, and logging
+- **Strings & slicing** — string methods, cleaning input, masking secrets, the slicing
+  start/stop position trap
+- **Tuples & Sets** — immutability, deduplication, why dict keys behave like a set
+- **Comprehensions** — list and dict comprehensions, the duplicate-key overwrite trap
+- **Exceptions in depth** — the built-in exception hierarchy, `finally` scoping (it binds
+  to a specific `try`, not the whole script), deliberately `raise`-ing errors
+- **File handling** — `with open(...)`, read/write/append modes, line-by-line iteration,
+  `FileNotFoundError`
+- **Iterators & generators** — the iterator protocol (`iter()`/`next()`/`StopIteration`),
+  `yield`, lazy evaluation, single-consumption behavior — the same mechanism behind
+  streaming LLM responses
 - **Python conventions** — `if __name__ == "__main__":`, docstrings, type hints, snake_case
 
 ## Why This Matters
@@ -45,8 +77,16 @@ API calls), and writing reusable, production-style functions rather than one-off
 
 ## What's Next
 
-- Environment variables & secrets management
-- Calling LLM APIs (Anthropic/OpenAI)
-- Structured outputs & tool/function calling
+- Modules & imports in depth (multi-file project structure)
+- Prompt engineering & structured outputs
+- Multi-turn chat / tool (function) calling
 - Retrieval-augmented generation (RAG)
 - AI agents
+
+## Note on the `gemini_lesson` folder
+
+This folder contains a real `.env`-based project with its own virtual
+environment and dependencies. **Never commit a real `.env` file** — only
+`.env.example` (a placeholder) is tracked in git. See `.gitignore` at the
+repo root, and `05_professional_python/gemini_lesson/README.md` for setup
+instructions.

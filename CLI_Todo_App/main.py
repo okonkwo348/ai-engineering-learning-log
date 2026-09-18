@@ -39,14 +39,12 @@ from pathlib import Path
 
 
 def load_task():
-    file_path = Path("file.json")
-
-    if file_path.is_file():
         try:
             with open("file.json", "r") as file:
                 return json.load(file)
-        except json.JSONDecodeError:
+        except (FileNotFoundError, json.JSONDecodeError):
             return []
+    
 
 tasks = load_task()
 
@@ -64,7 +62,7 @@ def mark_task(index_list):
     global tasks
     if tasks is None:
         tasks = []
-        tasks[index_list]["done"] = True
+    tasks[index_list]["done"] = True
     
 
 def save_task():
@@ -91,20 +89,10 @@ while select:
         save_task()
 
     elif select == "list":
-        try:
-            load_task()
-        except FileNotFoundError as e:
-            logger.error(f"File Not found {e}")
-
         print(list_all_task())
 
     elif select == "done":
         index_list = input("Enter the tasks no: ")
-        try:
-            load_task()
-        except FileNotFoundError as e:
-            logger.error(f"File Not found {e}")
-    
         try:
             mark_task(int(index_list))
         except (ValueError, IndexError) as e:

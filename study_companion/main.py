@@ -21,8 +21,7 @@ class QuizQuestion:
 
 
     def __str__(self):
-        return f"[{self.title.upper()}] Q: {self.question} (Ans: {self.answer})"
-
+        return f"[{self.title}] Q: {self.question} (A: {self.answer})"
 class StudySession:
 
     def __init__(self, title, summary, questions):
@@ -41,12 +40,12 @@ class StudySession:
     ## __repr__  convert object memory address to unambiguous representation for developers, logging and debugging
     def  __repr__(self):
         """the string returned by __repr__ should look like valid python code that could recreate the object"""
-        return f"QuizQuestion(title={self.title!r}, summary={self.summary!r}, questions={self.questions!r})"
+        return f"StudySession(title={self.title!r}, summary={self.summary!r}, questions={self.questions!r})"
 
     # __str__ convert object memory to clear, readable output meant for end user or UI dispay
     def __str__(self):
         """called automatically by print() or str()"""
-        return f"{[self.title.upper()]}, SUMMARY:{self.summary}, QUESTIONS:{self.questions}"
+        return f"[{self.title.upper()}] no_question: {len(self.questions)} "
 
 
 num1 = QuizQuestion("variable", "is snakecase one of the way of declaring a variable", "True")

@@ -14,11 +14,19 @@ Notes on library choice:
   client-side failures (bad model name, bad request, etc).
 """
 
+"""1. import types from google.genai
+   2. add config=types.GenerateContentConfig(response_mime_type="application/json") parameter to generate_content(....)
+   3. wrap response.text in json.loads() and assign to a variable result and return the result 
+   4. wrap the from where you declare result variable and returned it in a try/except for json.JSONDecodeError. On failure here, log the error and returned None"""
+
+
 import logging
 import os
+import json
 
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 from google.genai import errors
 
 load_dotenv()
@@ -45,17 +53,31 @@ def ask_gemini(prompt: str) -> str | None:
         response = client.models.generate_content(
             model="gemini-3.6-flash",
             contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+            ),
         )
-        return response.text
+        try:
+            result = json.loads(response.text)
+            return result
+        except json.JSONDecodeError as e:
+            logger.warning(e)
+            return None
     except errors.ClientError as e:
         logger.error(f"Gemini request failed: {e}")
         return None
 
 
 if __name__ == "__main__":
-    result = ask_gemini("Say hello in one short sentence.")
+    result = ask_gemini("Give me a summary and 2 quiz questions about Python variables, as JSON")
 
     if result is None:
         logger.warning("No data received")
     else:
         logger.info(result)
+
+"""1. import types from google.genai
+   2. add config=types.GenerateContentConfig(response_mine_type="application/json") parameter to generate_content(....)
+   3. wrap response.text in json.loads() and assign to a variable result and return the result 
+   4. wrap the from where you declare result variable and returned it in a try/except for json.JSONDecodeError. On failure here, log the error and returned None"""
+

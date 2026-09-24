@@ -68,16 +68,30 @@ def ask_gemini(prompt: str) -> str | None:
         return None
 
 
+def generate_study_session(text):
+    prompt = f"""
+Based on the following text, generate a JSON object with this exact structure:
+{{
+  "title": "a short title for this topic",
+  "summary": "a concise summary of the text",
+  "questions": [
+    {{"title": "same as the main title", "question": "a quiz question", "answer": "the correct answer"}}
+  ]
+}}
+Generate exactly 3 questions. Text: {text}
+"""
+    return ask_gemini(prompt)
+
+result = generate_study_session("a paragraph about Python functions")
+print(result)
+
+
+
 if __name__ == "__main__":
-    result = ask_gemini("Give me a summary and 2 quiz questions about Python variables, as JSON")
+    
 
     if result is None:
         logger.warning("No data received")
     else:
         logger.info(result)
-
-"""1. import types from google.genai
-   2. add config=types.GenerateContentConfig(response_mine_type="application/json") parameter to generate_content(....)
-   3. wrap response.text in json.loads() and assign to a variable result and return the result 
-   4. wrap the from where you declare result variable and returned it in a try/except for json.JSONDecodeError. On failure here, log the error and returned None"""
 

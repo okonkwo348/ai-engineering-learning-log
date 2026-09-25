@@ -82,14 +82,12 @@ Generate exactly 3 questions. Text: {text}
 """
     return ask_gemini(prompt)
 
-result = generate_study_session("a paragraph about Python functions")
-print(result)
-
 
 
 if __name__ == "__main__":
     
-
+    result = generate_study_session("a paragraph about Python functions")
+    print(result)
     if result is None:
         logger.warning("No data received")
     else:

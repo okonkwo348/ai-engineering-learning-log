@@ -1,3 +1,5 @@
+from gemini_lesson.ask_gemini import generate_study_session
+
 import json
 class QuizQuestion:
     def __init__(self, title, question, answer):
@@ -47,23 +49,27 @@ class StudySession:
         """called automatically by print() or str()"""
         return f"[{self.title.upper()}] no_question: {len(self.questions)} "
 
+result = generate_study_session("a paragraph about Python functions")
 
-num1 = QuizQuestion("variable", "is snakecase one of the way of declaring a variable", "True")
-num2 = QuizQuestion("class", "class name is declared using camelcase", "True")
 
-new_session = StudySession("variable", "varibles are containers that store data values. They can store string, numbers, booleam, list etc", [num1,num2])
-session_dict = new_session.to_dict()
-print(session_dict)
+# num1 = QuizQuestion("variable", "is snakecase one of the way of declaring a variable", "True")
+# num2 = QuizQuestion("class", "class name is declared using camelcase", "True")
 
-rebuild_session = StudySession.from_dict(session_dict)
-print(rebuild_session.questions[1].question)
+# new_session = StudySession("variable", "varibles are containers that store data values. They can store string, numbers, booleam, list etc", [num1,num2])
+# session_dict = new_session.to_dict()
+# print(session_dict)
+
+new_session = StudySession.from_dict(result)
+print((new_session))
+print(repr(new_session))
+# print(new_session.questions[0].question)
 # print(new_session.questions[1].question)
 
-print(repr(num1))
-print(num1)
+# print(repr(num1))
+# print(num1)
 
-print(repr(new_session))
-print(new_session)
+# print(repr(new_session))
+# print(new_session)
 
 
 

@@ -50,6 +50,8 @@ class StudySession:
         return f"[{self.title.upper()}] no_question: {len(self.questions)} "
 
 result = generate_study_session("a paragraph about Python functions")
+new_session = StudySession.from_dict(result)
+print(new_session)
 
 
 # num1 = QuizQuestion("variable", "is snakecase one of the way of declaring a variable", "True")
@@ -59,9 +61,6 @@ result = generate_study_session("a paragraph about Python functions")
 # session_dict = new_session.to_dict()
 # print(session_dict)
 
-new_session = StudySession.from_dict(result)
-print((new_session))
-print(repr(new_session))
 # print(new_session.questions[0].question)
 # print(new_session.questions[1].question)
 
@@ -69,7 +68,7 @@ print(repr(new_session))
 # print(num1)
 
 # print(repr(new_session))
-# print(new_session)
+
 
 
 

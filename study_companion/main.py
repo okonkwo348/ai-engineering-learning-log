@@ -1,4 +1,6 @@
 from gemini_lesson.ask_gemini import generate_study_session
+import logging
+import sys
 
 import json
 class QuizQuestion:
@@ -49,9 +51,18 @@ class StudySession:
         """called automatically by print() or str()"""
         return f"[{self.title.upper()}] no_question: {len(self.questions)} "
 
-result = generate_study_session("a paragraph about Python functions")
-new_session = StudySession.from_dict(result)
-print(new_session)
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+if __name__ == "__main__":
+    result = generate_study_session("a paragraph about Python functions")
+    if result is None:
+        logger.error("No data received")
+        sys.exit()
+
+    new_session = StudySession.from_dict(result)
+    print(new_session)
 
 
 # num1 = QuizQuestion("variable", "is snakecase one of the way of declaring a variable", "True")
@@ -67,7 +78,8 @@ print(new_session)
 # print(repr(num1))
 # print(num1)
 
-# print(repr(new_session))
+
+
 
 
 

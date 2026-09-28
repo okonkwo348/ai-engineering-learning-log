@@ -62,7 +62,7 @@ if __name__ == "__main__":
         sys.exit()
 
     new_session = StudySession.from_dict(result)
-    print(new_session)
+    print(repr(new_session))
 
 
 # num1 = QuizQuestion("variable", "is snakecase one of the way of declaring a variable", "True")

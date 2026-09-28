@@ -131,7 +131,7 @@ def ask_gemini(prompt: str) -> str | None:
         except json.JSONDecodeError as e:
             logger.warning(e)
             return None
-    except errors.ClientError as e:
+    except (errors.APIError) as e:
         logger.error(f"Gemini request failed: {e}")
         return None
 
@@ -149,6 +149,7 @@ Based on the following text, generate a JSON object with this exact structure:
 Generate exactly 3 questions. Text: {text}
 """
     return ask_gemini(prompt)
+
 
 
 

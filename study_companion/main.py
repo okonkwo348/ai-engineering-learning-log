@@ -52,6 +52,10 @@ class StudySession:
         return f"[{self.title.upper()}] no_question: {len(self.questions)} "
 
 
+def save_sessions(sessions, filename):
+    with open(filename, "w") as file:
+        json.dump([session.to_dict() for session in sessions], file)
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 

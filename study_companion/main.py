@@ -51,6 +51,14 @@ class StudySession:
         """called automatically by print() or str()"""
         return f"[{self.title.upper()}] no_question: {len(self.questions)} "
 
+def load_sessions(filename):
+        try:
+            with open(filename, "r") as file:
+                list_dicts = json.load(file)
+                sessions = [StudySession.from_dict(each_dict) for each_dict in list_dicts]
+                return sessions
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []
 
 def save_sessions(sessions, filename):
     with open(filename, "w") as file:

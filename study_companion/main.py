@@ -74,7 +74,10 @@ if __name__ == "__main__":
         sys.exit()
 
     new_session = StudySession.from_dict(result)
-    print(repr(new_session))
+    tasks = load_sessions("storage.json")
+    tasks.append(new_session)
+    save_sessions(tasks, "storage.json")
+    # print(repr(new_session))
 
 
 # num1 = QuizQuestion("variable", "is snakecase one of the way of declaring a variable", "True")

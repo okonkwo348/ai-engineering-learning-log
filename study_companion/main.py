@@ -88,8 +88,7 @@ def main():
         save_sessions(tasks, "storage.json")
 
         elif input_var == "list":
-            tasks = load_sessions("storage.json")
-            total_session = StudySession.from_dict(tasks)
+            total_session = load_sessions("storage.json")
             for session in total_session:
                 print(str(session))
 

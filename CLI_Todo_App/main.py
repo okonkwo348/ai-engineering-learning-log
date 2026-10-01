@@ -77,21 +77,21 @@ def save_task():
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
 
-select = True
-while select:
+is_running = True
+while is_running:
     print("Welcome to Todo App!")
-    select =   input(": Enter: 'add' to add tasks, 'list' to list all tasks, 'done' to mark a tasks done, 'exit' to quite > ")
-    select = select.lower().strip()
+    input_var =   input(": Enter: 'add' to add tasks, 'list' to list all tasks, 'done' to mark a tasks done, 'exit' to quite > ")
+    input_var = input_var.lower().strip()
 
-    if select == "add":
+    if input_var == "add":
         new_task = input(" Enter tasks e.g 'sweep', sleep'....>")
         add_tasks(new_task)
         save_task()
 
-    elif select == "list":
+    elif input_var == "list":
         print(list_all_task())
 
-    elif select == "done":
+    elif input_var == "done":
         index_list = input("Enter the tasks no: ")
         try:
             mark_task(int(index_list))
@@ -103,11 +103,16 @@ while select:
         except FileNotFoundError as e:
             logger.error(f"File Not found {e}")
 
+    elif input_var == "exit":
+        is_running = False 
+
+    elif (input_var != "add" or input_var != "list" or input_var != "done" ):
+        continue
+
             
 
 
-    elif select == "exit":
-        select = False
+    
 
         
 

@@ -49,7 +49,7 @@ class StudySession:
     # __str__ convert object memory to clear, readable output meant for end user or UI dispay
     def __str__(self):
         """called automatically by print() or str()"""
-        return f"[{self.title.upper()}] no_question: {len(self.questions)} "
+        return f"[{self.title.upper()}] no_question: N {len(self.questions)} "
 
 def load_sessions(filename):
         try:
@@ -66,6 +66,36 @@ def save_sessions(sessions, filename):
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+def main():
+
+    is_running = True
+    while is_running:
+
+        input_var = input( ": Enter: 'new' to add tasks, 'list' to list all tasks, "
+            "'view' to view a task, 'exit' to quit > ")
+
+        if input_var == "new":
+            topic = input("What topic or have in mind? > ")
+            result = generate_study_session(topic)
+            if result is None:
+                logger.error("No data received")
+                continue
+
+        new_session = StudySession.from_dict(result)
+        tasks = load_sessions("storage.json")
+        tasks.append(new_session)
+        save_sessions(tasks, "storage.json")
+
+        elif input_var == "list":
+            tasks = load_sessions("storage.json")
+            total_session = StudySession.from_dict(tasks)
+            for session in total_session:
+                print(str(session))
+
+
+            
+
 
 if __name__ == "__main__":
     result = generate_study_session("a paragraph about Python functions")

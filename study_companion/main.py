@@ -92,6 +92,28 @@ def main():
             for session in total_session:
                 print(str(session))
 
+        elif input_var == "view":
+            title_input = input("What do you what to view? >")
+            tasks = load_sessions("storage.json")
+            similar_search = []
+            for session in tasks:
+                if session.title == title_input:
+                    similar_search.append(session)
+                    try:
+                        select_one = int(input("Enter a valid digit eg 1, 2, 3,.. >"))
+                        print(similar_search[select_one - 1])
+                    except ValueError as e:
+                        print("please enter a digit: 1, 2, 3,.... ")
+                        continue
+
+        elif input_var == "exit":
+            is_running = 
+            
+        elif (input_var != "new" or input_var != "list " or input_var != "view" ):
+            continue
+
+                 
+
 
             
 

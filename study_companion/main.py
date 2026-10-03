@@ -82,10 +82,10 @@ def main():
                 logger.error("No data received")
                 continue
 
-        new_session = StudySession.from_dict(result)
-        tasks = load_sessions("storage.json")
-        tasks.append(new_session)
-        save_sessions(tasks, "storage.json")
+            new_session = StudySession.from_dict(result)
+            tasks = load_sessions("storage.json")
+            tasks.append(new_session)
+            save_sessions(tasks, "storage.json")
 
         elif input_var == "list":
             total_session = load_sessions("storage.json")
@@ -93,23 +93,35 @@ def main():
                 print(str(session))
 
         elif input_var == "view":
-            title_input = input("What do you what to view? >")
+            title_input = input("What do you want to view? >")
             tasks = load_sessions("storage.json")
             similar_search = []
+
             for session in tasks:
-                if session.title == title_input:
+                if title_input.lower() in session.title.lower():
                     similar_search.append(session)
-                    try:
-                        select_one = int(input("Enter a valid digit eg 1, 2, 3,.. >"))
-                        print(similar_search[select_one - 1])
-                    except ValueError as e:
-                        print("please enter a digit: 1, 2, 3,.... ")
-                        continue
+
+            if len(similar_search) == 0:
+                print(f"{title_input} does not exist")
+
+            elif len(similar_search) == 1:
+                    print(similar_search[0])
+
+            elif len(similar_search) > 1:    
+                print(f"There are more than one {title_input}. You will have to select one")
+                try:
+                    select_one = int(input("To Select: Enter a valid digit eg 1, 2, 3,.. >"))
+                    print(similar_search[select_one - 1])
+                except ValueError:
+                    print("please enter a digit: 1, 2, 3,.... ")
+                    continue
+
+
 
         elif input_var == "exit":
-            is_running = 
+            is_running = False
             
-        elif (input_var != "new" or input_var != "list " or input_var != "view" ):
+        else:
             continue
 
                  
@@ -119,15 +131,18 @@ def main():
 
 
 if __name__ == "__main__":
-    result = generate_study_session("a paragraph about Python functions")
-    if result is None:
-        logger.error("No data received")
-        sys.exit()
+    main()
 
-    new_session = StudySession.from_dict(result)
-    tasks = load_sessions("storage.json")
-    tasks.append(new_session)
-    save_sessions(tasks, "storage.json")
+
+    # result = generate_study_session("a paragraph about Python functions")
+    # if result is None:
+    #     logger.error("No data received")
+    #     sys.exit()
+
+    # new_session = StudySession.from_dict(result)
+    # tasks = load_sessions("storage.json")
+    # tasks.append(new_session)
+    # save_sessions(tasks, "storage.json")
     # print(repr(new_session))
 
 

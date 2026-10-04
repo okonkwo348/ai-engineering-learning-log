@@ -106,7 +106,7 @@ while is_running:
     elif input_var == "exit":
         is_running = False 
 
-    elif (input_var != "add" or input_var != "list" or input_var != "done" ):
+    else:
         continue
 
             

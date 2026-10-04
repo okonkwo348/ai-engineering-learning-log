@@ -137,10 +137,12 @@ def ask_gemini(prompt: str) -> str | None:
 
 
 def generate_study_session(text):
-    prompt = f"""
+    title_prompt = """a short title for the topic given it must relate directly to the original
+    topic or be derived from it."""
+    prompt = f""" {title_prompt}
 Based on the following text, generate a JSON object with this exact structure:
 {{
-  "title": "a short title for this topic",
+  "title": "short title",
   "summary": "a concise summary of the text",
   "questions": [
     {{"title": "same as the main title", "question": "a quiz question", "answer": "the correct answer"}}

@@ -4,31 +4,33 @@ import sys
 
 import json
 class QuizQuestion:
-    def __init__(self, title, question, answer):
+    def __init__(self, title: str, question: str, answer: str) -> None:
         self.title = title
         self.question = question
         self.answer = answer
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str,str]:
         """Convert this object into a plain, safe for json.jump()."""
         return {"title": self.title, "question": self.question, "answer": self.answer}
 
     @classmethod
-    def from_dict(cls, data: dict):
+    def from_dict(cls, data: dict) -> "QuizQuestion":
         """Rebuild a QuizzQuestion object from a plain dic (e.g. loaded from JSON)."""
         return cls(title=data["title"], question=data["question"], answer=data["answer"])
 
     # __repr__  convert object memory address to unambiguous representation for developers, logging and debugging 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """the string returned by __repr__ should look like valid python code that could recreate the object"""
         return f"QuizQuestion(title={self.title!r}, question={self.question!r}, answer={self.answer!r})"
 
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"[{self.title}] Q: {self.question} (A: {self.answer})"
+
+
 class StudySession:
 
-    def __init__(self, title, summary, questions):
+    def __init__(self, title: str, summary: str, questions: str) -> None:
         self.title = title
         self.summary = summary
         self.questions = questions
@@ -37,21 +39,21 @@ class StudySession:
         return {"title":self.title, "summary":self.summary, "questions":[question.to_dict() for question in self.questions]}
 
     @classmethod
-    def from_dict(cls, data: dict):
+    def from_dict(cls, data: dict) -> "StudySession":
         questions_list = [QuizQuestion.from_dict(q) for q in data["questions"]]
         return cls(title=data["title"], summary=data["summary"], questions = questions_list)
 
     ## __repr__  convert object memory address to unambiguous representation for developers, logging and debugging
-    def  __repr__(self):
+    def  __repr__(self) -> str:
         """the string returned by __repr__ should look like valid python code that could recreate the object"""
         return f"StudySession(title={self.title!r}, summary={self.summary!r}, questions={self.questions!r})"
 
     # __str__ convert object memory to clear, readable output meant for end user or UI dispay
-    def __str__(self):
+    def __str__(self) -> str:
         """called automatically by print() or str()"""
         return f"[{self.title.upper()}] no_question: N {len(self.questions)} "
 
-def load_sessions(filename):
+def load_sessions(filename) -> list:
         try:
             with open(filename, "r") as file:
                 list_dicts = json.load(file)
@@ -60,14 +62,14 @@ def load_sessions(filename):
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
-def save_sessions(sessions, filename):
+def save_sessions(sessions, filename) -> None:
     with open(filename, "w") as file:
         json.dump([session.to_dict() for session in sessions], file)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def main():
+def main() -> None:
 
     is_running = True
     while is_running:

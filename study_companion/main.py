@@ -30,7 +30,7 @@ class QuizQuestion:
 
 class StudySession:
 
-    def __init__(self, title: str, summary: str, questions: str) -> None:
+    def __init__(self, title: str, summary: str, questions: list[QuizQuestion]) -> None:
         self.title = title
         self.summary = summary
         self.questions = questions
@@ -53,7 +53,7 @@ class StudySession:
         """called automatically by print() or str()"""
         return f"[{self.title.upper()}] no_question: N {len(self.questions)} "
 
-def load_sessions(filename) -> list:
+def load_sessions(filename: str) -> list[StudySession]:
         try:
             with open(filename, "r") as file:
                 list_dicts = json.load(file)
@@ -62,7 +62,7 @@ def load_sessions(filename) -> list:
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
-def save_sessions(sessions, filename) -> None:
+def save_sessions(sessions: list[StudySession], filename: str) -> None:
     with open(filename, "w") as file:
         json.dump([session.to_dict() for session in sessions], file)
 

@@ -109,7 +109,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def ask_gemini(prompt: str) -> str | None:
+def ask_gemini(prompt: str) -> dict | None:
     """
     Send a prompt to Gemini and return the response text.
 
@@ -136,7 +136,7 @@ def ask_gemini(prompt: str) -> str | None:
         return None
 
 
-def generate_study_session(text):
+def generate_study_session(text: str) -> dict | None :
     title_prompt = """a short title for the topic given it must relate directly to the original
     topic or be derived from it."""
     prompt = f""" {title_prompt}

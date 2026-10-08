@@ -3,8 +3,8 @@
 #   {"id": "R002", "name": "Keyboard", "category": "Accessories", "total": 5, "available": 5},
 #   {"id": "R003", "name": "Headset", "category": "Accessories", "total": 3, "available": 3}
 # ]
-
-def load_task():
+import json
+def load_resources():
         try:
             with open("file.json", "r") as file:
                 return json.load(file)
@@ -12,12 +12,12 @@ def load_task():
             return []
     
 
-resources = load_task()
+resources = load_resources()
 
 fellows = {"F001": "Ada", "F002": "John", "F003": "Grace"}
 
 def add_resouce(ID, name, category, total, available):
-    new ={"id": "R00"+ ID, "name": name, "category": category, "total": total, "available": available}
+    new ={"id": ID, "name": name, "category": category, "total": total, "available": available}
     global resources
     for item in resources:
         if item["id"] == new["id"]:
@@ -30,9 +30,9 @@ def list_resources():
     for item in resources:
       print(item)
 
-def borrow(fellow_Id, resources_id, name, category, quantity):
+def borrow(fellow_id, resources_id, name, category, quantity):
     
-    if fellow_Id in fellows.keys():
+    if fellow_id in fellows.keys():
         global resources
         for item in resources:
             if item["id"] == resources_id:
@@ -40,10 +40,10 @@ def borrow(fellow_Id, resources_id, name, category, quantity):
                     return "Invalid quantity"
 
                 if  quantity > item["available"]:
-                    return "Quantity not available"
+                    return f"Quantity not available: {item["available"]} avaliable"
 
                 item["available"] -= quantity
-                return f"Resource borrowed successfully. Remaining available: {item['available']}"
+                return f" {fellow_id} borrows {quantity} {item["name"]} - available {item["name"]} units = {item['available']}"
                     
         return "Resource ID not found"
     else:
@@ -52,16 +52,16 @@ def borrow(fellow_Id, resources_id, name, category, quantity):
 
 
 
-def return_resource(fellow_Id, resources_id, name, category, quantity):
-        if fellow_Id in fellows.keys():
+def return_resource(fellow_id, resources_id, name, category, quantity):
+        if fellow_id in fellows.keys():
             global resources
             for item in resources:
                 if item["id"] == resources_id:
-                    if quantity >= item["total"] - item["available"]:
-                        return "Invalid quantity to return"
+                    if quantity > item["total"] - item["available"]:
+                        return f"{fellow_id} returns {quantity} {name} — rejected without changing stock"
 
                     item["available"] += quantity
-                    return f"Resource returned successfully. Remaining available: {item['available']}"
+                    return f"{fellow_id} returns {quantity} {name} — available {name} units = {item['available']}"
 
             return "Resource ID not found"
         else:
@@ -71,7 +71,6 @@ def return_resource(fellow_Id, resources_id, name, category, quantity):
 
 
 
-print(return_resource("F002", "R002", "laptop", "Electronics", 2))
 
 
 def search_resourse(name):
@@ -83,7 +82,7 @@ def search_resourse(name):
 
 def save_task():
     with open("file.json", "w") as file:
-        json.dump(tasks, file, indent=2)
+        json.dump(resources, file, indent=2)
 
 
 
@@ -93,7 +92,53 @@ while state:
     input_var = input(": Enter: 'add' to add resources, 'list' to list all resources, 'borrow' to borrow a resource, 'return' to return a resource, 'search' to search for a resource, 'exit' to quit > ")
     response = input_var.lower().strip()
 
-    if respose == "add": 
+    if response == "add": 
+        Id = input("Enter an Id eg..R001, R002, R003, R004> ").title()
+        name = input("Enter an Item you need eg..car, laptop, shoe, shirt> ").title()
+        category = input("Enter the category of item you want eg..electronics, vehicle, cloth, footware> ").title()
+
+        try:
+             total = int(input("Enter the total no of items> "))
+             available = total
+        except ValueError:
+            print("Invalid total: integers are accepted only")
+
+        new = add_resouce(Id, name, category, total, available)
+        save_task()
+
+
+    elif response == "list":
+        list_resources()
+
+    elif response == "borrow":
+        fellow_id = input("Enter your student no eg..F001, F002, F003> ")
+        resource_id = input("Enter your student no eg..R001, R002, R003> ")
+        item_name = input("Enter the item name> ")
+        category = input("Enter the catergory eg.. cloth, electronic")
+
+        try:
+            quantity = int(input("Enter the quantity to be borrowed eg..1, 2, 3> "))
+        except ValueError:
+            print("Invalid quantity: integer accepted only")
+        print(borrow(fellow_id, resource_id, item_name, category, quantity))
+         
+
+    elif response == "return":
+        fellow_id = input("Enter your student no eg..F001, F002, F003> ")
+        resource_id = input("Enter your student no eg..R001, R002, R003> ")
+        item_name = input("Enter the item name> ")
+        category = input("Enter the catergory eg.. cloth, electronic")
+
+        try:
+            quantity = int(input("Enter the quantity to be returned eg..1, 2, 3> "))
+        except ValueError:
+            print("Invalid quantity: integer accepted only")
+        print(return_resource(fellow_id, resource_id, item_name, category, quantity))
+
+    elif response == "exit":
+        state = False
+
+    
 
 
 

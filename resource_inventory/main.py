@@ -69,6 +69,34 @@ def return_resource(fellow_id, resources_id, name, category, quantity):
     
         return "rejected without changing stock"
 
+def report():
+    global resources
+    total = 0
+    borrowed = 0
+    available = 0
+    highest_borrowed = 0
+    lowest_stock = resources[0]
+    sentence_lowest_stock = ""
+    sentence_highest_borrowed = ""
+    for item in resources:
+        total += item["total"]
+        available += item["available"]
+        borrowed_item= item["total"] - item["available"]
+        borrowed += borrowed_item
+        if item["available"] < lowest_stock["available"]:
+            lowest_stock = item
+            sentence_lowest_stock += f"{item["name"]} low stock ({lowest_stock["available"]})"
+        
+        if borrowed_item > highest_borrowed:
+            highest_borrowed = borrowed_item
+            sentence_highest_borrowed += f"{item["name"]} is most borrowed ({highest_borrowed})"
+
+
+    print(f" Generate the report — overall units {total}, available {available}, borrowed {borrowed}, {sentence_lowest_stock}; {sentence_highest_borrowed}.")
+        
+
+
+
 
 
 
@@ -77,7 +105,7 @@ def search_resourse(name):
     global resources
     for item in resources:
         if item["name"].lower() == name.lower():
-            return item
+            return f"find {item["name"].title()}, ignoring case"
     return "Resource not found"
 
 def save_task():
@@ -89,7 +117,15 @@ def save_task():
 state = True
 while state:
     print("Welcome to Resource Management App!")
-    input_var = input(": Enter: 'add' to add resources, 'list' to list all resources, 'borrow' to borrow a resource, 'return' to return a resource, 'search' to search for a resource, 'exit' to quit > ")
+    input_var = input(""": Enter: 
+                        'add' to add resources, 
+                        'list' to list all resources, 
+                        'borrow' to borrow a resource, 
+                        'return' to return a resource, 
+                        'search' to search for a resource, 
+                        'report' to get summry of resource management,
+                        'exit' to quit
+     > """)
     response = input_var.lower().strip()
 
     if response == "add": 
@@ -134,6 +170,14 @@ while state:
         except ValueError:
             print("Invalid quantity: integer accepted only")
         print(return_resource(fellow_id, resource_id, item_name, category, quantity))
+
+
+    elif response == "search":
+        name = input("Enter the name of item you are looking for")
+        print(search_resourse(name))
+        
+    elif response == "report":
+        report()
 
     elif response == "exit":
         state = False

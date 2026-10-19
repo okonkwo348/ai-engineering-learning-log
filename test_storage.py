@@ -20,3 +20,8 @@ def test_save_then_load_round_trip(tmp_path):
     loaded_dicts = [s.to_dict() for s in loaded]
 
     assert loaded_dicts == original_dicts
+
+def test_load_sessions_missing_file(tmp_path):
+    path = tmp_path / "nonexistent_storage.json"
+    loaded = load_sessions(str(path))
+    assert loaded == []  # Expecting an empty list when the file does not exist

@@ -15,32 +15,58 @@ commented code demonstrating the core concept — not raw drafts.
 
 ```
 ai-engineering-learning-log/
+├── .gitignore
+├── README.md
+├── instruction.md
+├── requirements.txt
+├── requirements-dev.txt
+├── main.py
+├── practice.py
+├── tryExcept.py
+├── test.txt
+├── test2.txt
+├── test_quiz_question.py
+├── test_storage.py
+├── test_study_session.py
 ├── 01_python_foundations/
-│   ├── variables_types.py
-│   └── functions_control_flow.py
+│   ├── functions_control_flow.py
+│   ├── loop.py
+│   └── variables_types.py
 ├── 02_data_structures/
 │   ├── dicts_lists.py
 │   └── loops.py
 ├── 03_apis_and_requests/
-│   ├── first_api_call.py
 │   ├── error_handling.py
+│   ├── first_api_call.py
 │   └── reusable_fetch_function.py
 ├── 04_classes/
 │   └── api_response_class.py
 ├── 05_professional_python/
 │   └── gemini_lesson/
-│       ├── README.md
-│       ├── requirements.txt
 │       ├── .env.example
+│       ├── README.md
+│       ├── ask_gemini.py
 │       ├── check_env.py
-│       └── ask_gemini.py
+│       └── requirements.txt
 ├── 06_advanced_python/
-│   ├── strings_and_slicing.py
-│   ├── tuples_and_sets.py
 │   ├── comprehensions.py
 │   ├── exceptions_in_depth.py
 │   ├── file_handling.py
-│   └── iterators_and_generators.py
+│   ├── iterators_and_generators.py
+│   ├── modules_example/
+│   │   ├── main.py
+│   │   └── string_utils.py
+│   ├── strings_and_slicing.py
+│   └── tuples_and_sets.py
+├── 07_cli_todo_app/
+│   ├── README.md
+│   └── main.py
+├── CLI_Todo_App/
+├── gemini_lesson/
+├── resource_inventory/
+│   └── main.py
+├── study_companion/
+│   └── main.py
 ```
 
 

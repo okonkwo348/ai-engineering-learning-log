@@ -69,6 +69,12 @@ def save_sessions(sessions: list[StudySession], filename: str) -> None:
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def validate_session_data(data: dict) -> None:
+    if not isinstance(data, dict):
+        raise ValueError("Data must be a dictionary.")
+
+
+
 def main() -> None:
 
     is_running = True
@@ -128,12 +134,18 @@ def main() -> None:
 
                  
 
-
+data = {
+        "title": "t",
+        "summary": "s",
+        "questions": [{"title": "t", "question": "Q1?"}],
+    }
+StudySession.from_dict(data)
             
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+    # main()
+    
 
 
     # result = generate_study_session("a paragraph about Python functions")

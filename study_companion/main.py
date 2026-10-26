@@ -72,16 +72,24 @@ logger = logging.getLogger(__name__)
 def validate_session_payload(data: dict) -> None:
     if not isinstance(data, dict):
         raise ValueError("Data must be a dictionary.")
-    if not isinstance(data["title"], str) and data["title"] is None:
+    if data["title"] is None:
+            raise KeyError("title key not avaible")
+    if not isinstance(data["title"], str):
             raise ValueError("title must be string")
-    if not isinstance(data["summary"], str) and data["summary"] is None:
+    if data["summary"] is None:
+            raise KeyError("title key not avaible")
+    if not isinstance(data["summary"], str):
             raise ValueError("summary must be string")
     if not isinstance(data["questions"],list):
         raise ValueError("Question must be a list")
     for q_dict in data["questions"]:
-        if not isinstance(q_dict["title"], str) and q_dict["title"] is None:
+        if q_dict["title"] is None:
+            raise KeyError("title key not avaible")
+        if not isinstance(q_dict["title"], str):
             raise ValueError("title must be string")
-        if not isinstance(q_dict["question"], str) and q_dict["question"] is None:
+        if q_dict["question"] is None:
+            raise KeyError("question key not avaible")
+        if not isinstance(q_dict["question"], str):
             raise ValueError("question must be string")
         if  q_dict["answer"] is None:
             raise KeyError("answer key not avaible")

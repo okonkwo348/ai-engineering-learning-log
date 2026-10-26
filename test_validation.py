@@ -7,5 +7,6 @@ def test_validate_payload():
     "summary": "s",
     "questions": [{"title": "t", "question": "Q1?"}],
 }
-    with pytest.raises(KeyError):
+    with pytest.raises(ValueError):
         validate_session_payload(data)
+    

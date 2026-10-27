@@ -72,29 +72,32 @@ logger = logging.getLogger(__name__)
 def validate_session_payload(data: dict) -> None:
     if not isinstance(data, dict):
         raise ValueError("Data must be a dictionary.")
-    if data["title"] is None:
-            raise KeyError("title key not avaible")
-    if not isinstance(data["title"], str):
-            raise ValueError("title must be string")
-    if data["summary"] is None:
-            raise KeyError("title key not avaible")
-    if not isinstance(data["summary"], str):
-            raise ValueError("summary must be string")
+    if "title" not in data:
+            raise ValueError("title key not avaible")
+    if not isinstance(data["title"], str) or data["title"].strip() == "":
+            raise ValueError("title must be string and not empty")
+    if "summary" not in data :
+            raise ValueError("summary key not avaible")
+    if not isinstance(data["summary"], str) or data["summary"].strip() == "":
+            raise ValueError("summary must be string and not empty")
     if not isinstance(data["questions"],list):
         raise ValueError("Question must be a list")
-    for q_dict in data["questions"]:
-        if q_dict["title"] is None:
-            raise KeyError("title key not avaible")
-        if not isinstance(q_dict["title"], str):
-            raise ValueError("title must be string")
-        if q_dict["question"] is None:
-            raise KeyError("question key not avaible")
-        if not isinstance(q_dict["question"], str):
-            raise ValueError("question must be string")
-        if  q_dict["answer"] is None:
-            raise KeyError("answer key not avaible")
-        if not isinstance(q_dict["answer"], str):
-            raise ValueError("answer must be string")
+    
+    for index, q_dict in enumerate(data["questions"]):
+        if not isinstance(q_dict, dict):
+            raise ValueError(f"question {index}: is not a dictionary")
+        if "title" not in q_dict:
+            raise ValueError(f"title {index} not avaible")
+        if not isinstance(q_dict["title"], str) or q_dict["title"].strip() == "":
+            raise ValueError("title must be string and not empty")
+        if "question" not in q_dict:
+            raise ValueError(f"question {index} not avaible")
+        if not isinstance(q_dict["question"], str) or q_dict["question"].strip() == "":
+            raise ValueError("question must be string and not empty")
+        if  "answer" not in q_dict:
+            raise ValueError(f"answer {index} not avaible")
+        if not isinstance(q_dict["answer"], str) or q_dict["answer"].strip() == "":
+            raise ValueError("answer must be string and not empty")
         
 
 

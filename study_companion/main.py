@@ -119,6 +119,14 @@ def main() -> None:
             if result is None:
                 logger.error("No data received")
                 continue
+            
+            try:
+                validate_session_payload(result)
+
+            except ValueError as e:
+                print("The reponse from the LLM is incomplete")
+                logger.error(f"incomplete LLm response -> {e}")
+                continue
 
             new_session = StudySession.from_dict(result)
             tasks = load_sessions("storage.json")

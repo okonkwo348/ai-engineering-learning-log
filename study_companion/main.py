@@ -129,10 +129,10 @@ def main() -> None:
                 continue
 
             new_session = StudySession.from_dict(result)
-            print(">>> A new session created successfuly !!!")
             tasks = load_sessions("storage.json")
             tasks.append(new_session)
             save_sessions(tasks, "storage.json")
+            print(">>> A new session created successfully !!!")
 
         elif input_var == "list":
             total_session = load_sessions("storage.json")

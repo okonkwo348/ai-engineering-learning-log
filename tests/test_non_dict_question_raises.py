@@ -8,14 +8,14 @@ def test_non_dict_question_raises():
         "summary": "s", 
         "questions": ["oops"]
         }
-    with pytest.raises(ValueError, match =  "question 0 : is not a dictionary"):
+    with pytest.raises(ValueError, match =  "question 0: is not a dictionary"):
         validate_session_payload(data)
 
-def test_non_dict_question_does_not_raises():
+def test_valid_question_does_not_raise():
     data = {
         "title": "t", 
         "summary": "s", 
-        "questions": ["oops"]
+        "questions": [{"title": "t", "question": "Q1?", "answer": "A1"}]
         }
     validate_session_payload(data)
 

@@ -8,7 +8,7 @@ My path is:
 - AI Engineer
 - Robotics Engineer
 
-The goal is not to rush through tutorials, but to build solid understanding through practical, real-world AI engineering work: API integrations, backend thinking, LLM usage, and agent-style problem solving.
+The goal is to build strong fundamentals through hands-on work: API integrations, backend thinking, LLM usage, debugging, and practical AI application patterns.
 
 ## Repository purpose
 
@@ -20,42 +20,89 @@ This repo captures:
 - Classes and reusable application design
 - Professional Python habits such as virtual environments, `.env` management, and logging
 - LLM integration with Gemini
-- Small portfolio-style project work built from the learning
+- Small portfolio-style project work built from real learning exercises
+- Testing and failure-driven debugging with `pytest`
 
-## Current structure
+## Current project structure
 
 ```text
 ai-engineering-learning-log/
+├── .gitignore
 ├── README.md
 ├── instruction.md
 ├── requirements.txt
 ├── requirements-dev.txt
+├── pytest.ini
 ├── main.py
 ├── practice.py
 ├── tryExcept.py
-├── test_quiz_question.py
-├── test_storage.py
-├── test_study_session.py
+├── test2.txt
+├── AI_Concepts/
+│   └── ai_engineering_foundations_reference_guide.md
 ├── 01_python_foundations/
+│   ├── functions_control_flow.py
+│   ├── loop.py
+│   └── variables_types.py
 ├── 02_data_structures/
+│   ├── dicts_lists.py
+│   └── loops.py
 ├── 03_apis_and_requests/
+│   ├── error_handling.py
+│   ├── first_api_call.py
+│   └── reusable_fetch_function.py
 ├── 04_classes/
+│   └── api_response_class.py
 ├── 05_professional_python/
+│   └── gemini_lesson/
+│       ├── .env.example
+│       ├── README.md
+│       ├── ask_gemini.py
+│       ├── check_env.py
+│       └── requirements.txt
 ├── 06_advanced_python/
+│   ├── comprehensions.py
+│   ├── exceptions_in_depth.py
+│   ├── file_handling.py
+│   ├── iterators_and_generators.py
+│   ├── modules_example/
+│   │   ├── main.py
+│   │   └── string_utils.py
+│   ├── strings_and_slicing.py
+│   └── tuples_and_sets.py
 ├── 07_cli_todo_app/
+│   ├── README.md
+│   └── main.py
+├── CLI_Todo_App/
+│   ├── file.json
+│   └── main.py
 ├── gemini_lesson/
-├── study_companion/
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── README.md
+│   ├── ask_gemini.py
+│   ├── check_env.py
+│   └── requirements.txt
 ├── resource_inventory/
-└── CLI_Todo_App/
+│   └── main.py
+├── study_companion/
+│   └── main.py
+├── tests/
+│   ├── test_missing_answer_raises.py
+│   ├── test_non_dict_question_raises.py
+│   ├── test_non_string_answer_raises.py
+│   ├── test_quiz_question.py
+│   ├── test_storage.py
+│   └── test_study_session.py
+└── README.md
 ```
 
 ## Learning phases covered
 
 The repo currently includes work across several phases, including:
 
-- Python fundamentals: variables, functions, control flow, loops, strings, slicing, exceptions, modules, file handling
-- Data structures: lists, dicts, tuples, sets, comprehensions
-- API work: `requests`, JSON handling, HTTP status codes, and safe retry/error patterns
+- Python fundamentals: variables, functions, control flow, loops, strings, slicing, exceptions, modules, and file handling
+- Data structures: lists, dicts, tuples, sets, and comprehensions
+- API work: `requests`, JSON handling, HTTP status codes, and safe error handling
 - Classes: object-oriented design, `__init__`, methods, serialization, and debugging common class issues
 - Professional Python: virtual environments, `.env` files, logging, type hints, and clean code habits
 - AI engineering basics: Gemini API integration, prompt design, and structured outputs
@@ -69,10 +116,10 @@ Located in `07_cli_todo_app/`.
 This project demonstrates:
 
 - JSON persistence
-- Structured menu-driven CLI design
-- Safe input validation
-- Exception handling for invalid actions and corrupted data
-- Logging instead of noisy debug output
+- structured menu-driven CLI design
+- safe input validation
+- exception handling for invalid actions and corrupted data
+- logging instead of noisy debugging output
 
 ### 2. Study Companion
 Located in `study_companion/`.
@@ -83,12 +130,12 @@ This is the main portfolio-style project in the repo. It includes:
 - quiz question storage and loading
 - persistence to a JSON file
 - menu-driven user interaction
-- test coverage for core behavior
+- tests for core behavior
 
 ### 3. Gemini lesson
-Located in `gemini_lesson/`.
+Located in `gemini_lesson/` and `05_professional_python/gemini_lesson/`.
 
-This folder demonstrates how to:
+These folders demonstrate how to:
 
 - manage API keys with `.env`
 - create a virtual environment

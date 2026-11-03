@@ -14,7 +14,7 @@ VALID_PAYLOAD = {
 }
 
 @pytest.mark.parametrize(
-    "payload, expected_error, error_message",
+    "payload_data, expected_error, error_message",
     [
         # --- Invalid Top-Level Data Types ---
         (
@@ -31,6 +31,6 @@ VALID_PAYLOAD = {
         ]
 )
 
-def test_validate_session_payload_negative_case(payload, expected_error, error_message):
+def test_validate_session_payload_negative_case(payload_data, expected_error, error_message):
     with pytest.raises(expected_error, match = error_message):
-        validate_session_payload(payload)
+        validate_session_payload(payload_data)

@@ -14,23 +14,23 @@ VALID_PAYLOAD = {
 }
 
 @pytest.mark.parametrize(
-    "payload", "expected_error",
+    "payload, expected_error, error_message",
     [
         # --- Invalid Top-Level Data Types ---
         (
-            {**VALID_PAYLOAD, "title": 5, "summary": "s", "questions":[]}, ValueError
+            {**VALID_PAYLOAD, "title": 5, "summary": "s", "questions":[{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "title must be string and not empty"
         ),
         (
-            {**VALID_PAYLOAD, "title": "t", "summary": 5, "questions": []}, ValueError
+            {**VALID_PAYLOAD, "title": "t", "summary": 5, "questions": [{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "summary must be string and not empty"
         ),
         (
-            {**VALID_PAYLOAD, "title": "t", "summary": "s", "questions":5}, ValueError
+            {**VALID_PAYLOAD, "questions": [{**VALID_PAYLOAD["questions"][0], "question": 5}]}, ValueError, "question must be string and not empty"
         ),
 
 
         ]
 )
 
-def test_validate_session_payload_negative_case(payload, expected_error):
-    with pytest.raises(expected_error):
+def test_validate_session_payload_negative_case(payload, expected_error, error_message):
+    with pytest.raises(expected_error, match = error_message):
         validate_session_payload(payload)

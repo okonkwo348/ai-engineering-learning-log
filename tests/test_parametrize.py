@@ -34,6 +34,10 @@ VALID_PAYLOAD = {
         (
             # "questions" is a string, not a list
             {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": "abc"}, ValueError, "must be a list"
+        ),
+        (
+            # when the "questions" is an empty list
+            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": []}, ValueError, "list is empty"
         )
 
 

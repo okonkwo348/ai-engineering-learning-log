@@ -27,6 +27,10 @@ VALID_PAYLOAD = {
             {**VALID_PAYLOAD, "questions": [{**VALID_PAYLOAD["questions"][0], "question": 5}]}, ValueError, "question must be string and not empty"
         ),
 
+        (
+            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"]}, ValueError, 'questions key not avaible'
+        ),
+
 
         ]
 )

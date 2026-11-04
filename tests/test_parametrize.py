@@ -38,7 +38,12 @@ VALID_PAYLOAD = {
         (
             # when the "questions" is an empty list
             {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": []}, ValueError, "list is empty"
-        )
+        ),
+        (
+            # when the "questions" list contains a non-dictionary item
+           {"title": "T", "summary": "S", "questions": [{"title": "Q", "question": "   ", "answer": "A"}]}, ValueError, "question must be string and not empty"
+        ),
+        
 
 
         ]

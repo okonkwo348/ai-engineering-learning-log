@@ -93,15 +93,15 @@ def validate_session_payload(data: dict) -> None:
         if "title" not in q_dict:
             raise ValueError(f"title {index} not avaible")
         if not isinstance(q_dict["title"], str) or q_dict["title"].strip() == "":
-            raise ValueError("title must be string and not empty")
+            raise ValueError(f"title {index}: title must be string and not empty")
         if "question" not in q_dict:
             raise ValueError(f"question {index} not avaible")
         if not isinstance(q_dict["question"], str) or q_dict["question"].strip() == "":
-            raise ValueError("question must be string and not empty")
+            raise ValueError(f"question {index}: question must be string and not empty")
         if  "answer" not in q_dict:
             raise ValueError(f"answer {index} not available")
         if not isinstance(q_dict["answer"], str) or q_dict["answer"].strip() == "":
-            raise ValueError("answer must be string and not empty")
+            raise ValueError(f"answer {index}: answer must be string and not empty")
         
 
 

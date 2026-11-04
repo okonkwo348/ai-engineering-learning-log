@@ -80,6 +80,8 @@ def validate_session_payload(data: dict) -> None:
             raise ValueError("summary key not avaible")
     if not isinstance(data["summary"], str) or data["summary"].strip() == "":
             raise ValueError("summary must be string and not empty")
+    if "questions" not in data:
+            raise ValueError("questions key not avaible")
     if not isinstance(data["questions"],list):
         raise ValueError("Question must be a list")
     

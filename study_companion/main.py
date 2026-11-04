@@ -84,6 +84,8 @@ def validate_session_payload(data: dict) -> None:
             raise ValueError("questions key not avaible")
     if not isinstance(data["questions"],list):
         raise ValueError("questions must be a list")
+    if len(data["questions"]) == 0:
+        raise ValueError("list is empty")
     
     for index, q_dict in enumerate(data["questions"]):
         if not isinstance(q_dict, dict):

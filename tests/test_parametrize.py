@@ -28,8 +28,13 @@ VALID_PAYLOAD = {
         ),
 
         (
+            # missing "questions" key
             {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"]}, ValueError, 'questions key not avaible'
         ),
+        (
+            # "questions" is a string, not a list
+            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": "abc"}, ValueError, "must be a list"
+        )
 
 
         ]

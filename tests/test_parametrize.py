@@ -16,6 +16,10 @@ VALID_PAYLOAD = {
 @pytest.mark.parametrize(
     "payload_data, expected_error, error_message",
     [
+        # --- payload not a dict ---
+        (
+            "aaa", ValueError, "Data must be a dictionary."
+        ),
         # --- Invalid Top-Level Data Types ---
         (
             {**VALID_PAYLOAD, "title": 5, "summary": "s", "questions":[{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "title must be string and not empty"
@@ -27,7 +31,7 @@ VALID_PAYLOAD = {
             {**VALID_PAYLOAD, "questions": [{**VALID_PAYLOAD["questions"][0], "question": 5}]}, ValueError, "question must be string and not empty"
         ),
 
-        # --missing Top-Level key field
+        # --missing Top-Level key field ---
         (
            { "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "title key not avaible" 
         ),

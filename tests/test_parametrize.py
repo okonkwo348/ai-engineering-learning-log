@@ -48,9 +48,17 @@ VALID_PAYLOAD = {
             {"title": "T", "summary": "S", "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "    ", "answer": "A2"}]}, ValueError, "question must be string and not empty"
         ),
         (
-            #Add test for non-string answer with index
+            #non-string answer with index
             {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": 3}]}, ValueError, "answer 1: answer must be string and not empty"
         ),
+
+            # the top-level title is valid and the bad item is at index 1:
+        (
+           {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": " ", "question": "q", "answer": "a"}]}, ValueError, f"title 1: title must be string and not empty"
+        ),
+
+
+
 
         ]
 )

@@ -18,7 +18,7 @@ VALID_PAYLOAD = {
     [
         # --- payload not a dict ---
         (
-            "aaa", ValueError, "Data must be a dictionary."
+            "aaa", ValueError, "must be a dictionary"
         ),
         # --- Invalid Top-Level Data Types ---
         (

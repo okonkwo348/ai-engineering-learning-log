@@ -27,6 +27,13 @@ VALID_PAYLOAD = {
             {**VALID_PAYLOAD, "questions": [{**VALID_PAYLOAD["questions"][0], "question": 5}]}, ValueError, "question must be string and not empty"
         ),
 
+        # --missing Top-Level key field
+        (
+           { "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "title key not avaible" 
+        ),
+        (
+            {"title": VALID_PAYLOAD["title"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "summary key not avaible"
+        ),
         (
             # missing "questions" key
             {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"]}, ValueError, 'questions key not avaible'

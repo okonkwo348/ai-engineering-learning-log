@@ -63,9 +63,17 @@ VALID_PAYLOAD = {
             # when the "questions" list contains a dictionary with an empty "question" string
             {"title": "T", "summary": "S", "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "    ", "answer": "A2"}]}, ValueError, "question must be string and not empty"
         ),
+            # Empty item-level for "question" at index 0
+            (
+                {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "question 0: question must be string and not empty"
+            ),
         (
             #non-string answer with index
             {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": 3}]}, ValueError, "answer 1: answer must be string and not empty"
+        ),
+        (
+            # Empty item-level for "answwer" at index 0
+            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": ""}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "answer 0: answer must be string and not empty"
         ),
 
             # the top-level title is valid and the bad item is at index 1:

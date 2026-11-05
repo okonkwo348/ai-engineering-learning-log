@@ -70,6 +70,10 @@ VALID_PAYLOAD = {
         (
            # Missing "title" at Item_level 
            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"question": "q", "answer": "a"}]}, ValueError, "title 1 not avaible"
+        ),
+        (
+            # Missing "question" at Item_level
+            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t", "answer": "a"}]}, ValueError, "question 1 not avaible"
         )
 
 

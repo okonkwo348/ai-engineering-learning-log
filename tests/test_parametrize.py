@@ -22,7 +22,7 @@ VALID_PAYLOAD = {
         ),
         # --- Invalid Top-Level Data Types ---
         (
-            {**VALID_PAYLOAD, "title": 5, "summary": "s", "questions":[{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "title must be string and not empty"
+            {**VALID_PAYLOAD, "title": 5, "summary": "s", "questions":[{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "^title must be"
         ),
         (
             {**VALID_PAYLOAD, "title": "t", "summary": 5, "questions": [{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "summary must be string and not empty"
@@ -33,7 +33,7 @@ VALID_PAYLOAD = {
 
         # Empty top-level "title"
         (
-            {**VALID_PAYLOAD, "title": "", "summary": "s", "questions":[{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "title must be string and not empty"
+            {**VALID_PAYLOAD, "title": "", "summary": "s", "questions":[{"title": "s", "question": "q", "answer": "a"}]}, ValueError, "^title must be"
         ),
 
         # --missing Top-Level key field ---

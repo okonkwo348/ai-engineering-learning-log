@@ -108,6 +108,16 @@ The repo currently includes work across several phases, including:
 - AI engineering basics: Gemini API integration, prompt design, and structured outputs
 - Testing: `pytest`, failure-driven debugging, and writing tests that catch real regressions
 
+## Recent additions
+
+New work has been added to strengthen the bridge between Python fundamentals and real AI application building:
+
+- prompt design and interaction with Gemini through a safe `.env`-managed setup
+- reusable API-wrapping patterns for handling failures without crashing the app
+- study tracking workflows that combine persistence, validation, and test coverage
+- small portfolio-style projects that demonstrate practical engineering habits rather than isolated toy examples
+- a more structured approach to learning by building, testing, and debugging real behavior
+
 ## Key projects
 
 ### 1. CLI Todo App
@@ -182,6 +192,7 @@ The repo is currently centered around:
 - learning how to debug real failures instead of guessing
 - creating reusable, testable AI project code
 - preparing portfolio work that demonstrates practical engineering skill
+- expanding into more AI-focused workflow patterns such as prompt design, validation, and structured outputs
 
 ## Notes
 
@@ -197,6 +208,7 @@ Planned next steps include:
 - broader backend and application design patterns
 - more production-minded debugging and validation practices
 - stronger portfolio projects with cleaner documentation and architecture
+- practical experimentation with AI workflows, automation, and tool use in real project contexts
 
 ---
 

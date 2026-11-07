@@ -38,14 +38,14 @@ VALID_PAYLOAD = {
 
         # --missing Top-Level key field ---
         (
-           { "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "title key not avaible" 
+           { "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "title key not available" 
         ),
         (
-            {"title": VALID_PAYLOAD["title"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "summary key not avaible"
+            {"title": VALID_PAYLOAD["title"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t2", "question": "q", "answer": "a"}]}, ValueError, "summary key not available"
         ),
         (
             # missing "questions" key
-            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"]}, ValueError, 'questions key not avaible'
+            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"]}, ValueError, 'questions key not available'
         ),
         (
             # "questions" is a string, not a list
@@ -82,11 +82,11 @@ VALID_PAYLOAD = {
         ),
         (
            # Missing "title" at Item_level 
-           {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"question": "q", "answer": "a"}]}, ValueError, "title 1 not avaible"
+           {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"question": "q", "answer": "a"}]}, ValueError, "title 1 not available"
         ),
         (
             # Missing "question" at Item_level
-            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t", "answer": "a"}]}, ValueError, "question 1 not avaible"
+            {"title": VALID_PAYLOAD["title"], "summary": VALID_PAYLOAD["summary"], "questions": [{"title": "t", "question": "q", "answer": "A"}, {"title": "t", "answer": "a"}]}, ValueError, "question 1 not available"
         )
 
 

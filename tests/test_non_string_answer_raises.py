@@ -7,7 +7,7 @@ def test_non_string_answer_raises():
         "summary": "s",
         "questions":[{"title": "t", "question": "q", "answer": 5}]
     }
-    with pytest.raises(ValueError, match ="answer must be string and not empty"):
+    with pytest.raises(ValueError, match ="answer 0: answer must be string and not empty"):
         validate_session_payload(data)
 
 def test_valid_answer_does_not_raise():

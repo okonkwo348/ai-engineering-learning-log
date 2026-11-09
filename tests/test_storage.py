@@ -1,5 +1,5 @@
 import pytest
-from study_companion.main import QuizQuestion, StudySession, save_sessions, load_sessions 
+from study_companion.main import QuizQuestion, StudySession, save_sessions, load_sessions, validate_session_payload
 
 
 def test_save_then_load_round_trip(tmp_path):
@@ -25,3 +25,27 @@ def test_load_sessions_missing_file(tmp_path):
     path = tmp_path / "nonexistent_storage.json"
     loaded = load_sessions(str(path))
     assert loaded == []  # Expecting an empty list when the file does not exist
+
+
+def test_loaded_payload (tmp_path):
+    q1 = QuizQuestion("python", "what is variable", "act as a container of values")
+    q2 = QuizQuestion("python", "What is self?", "The instance")
+    q3 = QuizQuestion("variable", "write a variable in camelcase?", "myVariable")
+    q4 = QuizQuestion("variable", "write a variable in snakecase", "my_variable")
+    q5 = QuizQuestion("class", "examples of dunder use in class", "__init__")
+    q6 = QuizQuestion("class", "examples of dunder use in class", "__str__")
+
+    sessions = [
+        StudySession("python", "python is a highlevel interpreted programming", [q1, q2]),
+        StudySession("programming", "programming is a step by step instruction of rules", [q3, q4]),
+        StudySession("class", "class is a bluesprint of creating an object",[q5,q6])
+        ]
+
+    path = tmp_path /  "storage.json"
+    loaded= load_sessions(str(path))
+    loaded_dicts = [s.to_dict for s in loaded]
+
+    with pytest.raises(ValueError):
+        validate_session_payload(loaded_dicts)
+
+   

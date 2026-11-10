@@ -1,4 +1,5 @@
 import pytest
+import json
 from study_companion.main import QuizQuestion, StudySession, save_sessions, load_sessions, validate_session_payload
 
 
@@ -27,25 +28,30 @@ def test_load_sessions_missing_file(tmp_path):
     assert loaded == []  # Expecting an empty list when the file does not exist
 
 
-def test_loaded_payload (tmp_path):
-    q1 = QuizQuestion("python", "what is variable", "act as a container of values")
-    q2 = QuizQuestion("python", "What is self?", "The instance")
-    q3 = QuizQuestion("variable", "write a variable in camelcase?", "myVariable")
-    q4 = QuizQuestion("variable", "write a variable in snakecase", "my_variable")
-    q5 = QuizQuestion("class", "examples of dunder use in class", "__init__")
-    q6 = QuizQuestion("class", "examples of dunder use in class", "__str__")
+def test_load_sessions_raises_value_error_naming_bad_session (tmp_path):
+    malformed_data = [
+        {
+            "title": "python",
+            "summary": "python is a highlevel interpreted programming",
+            "questions": [{"title": "python", "question": "what is variable", "answer": "act as a container"}]
+        },
+        {
+            # Missing "title" key intentionally!
+            "summary": "programming is a step by step instruction of rules",
+            "questions": [{"title": "variable", "question": "camelcase?", "answer": "myVariable"}]
+        },
+        {
+            "title": "variable",
+            "summary": "programming is a step by step instruction of rules",
+            "questions": [{"title": "variable", "question": "snakecase?", "answer": "a"}] 
+        }
+    ]
+    path = tmp_path / "storage.json"
+    
+    path.write_text(json.dumps(malformed_data))
+    
 
-    sessions = [
-        StudySession("python", "python is a highlevel interpreted programming", [q1, q2]),
-        StudySession("programming", "programming is a step by step instruction of rules", [q3, q4]),
-        StudySession("class", "class is a bluesprint of creating an object",[q5,q6])
-        ]
-
-    path = tmp_path /  "storage.json"
-    loaded= load_sessions(str(path))
-    loaded_dicts = [s.to_dict for s in loaded]
-
-    with pytest.raises(ValueError):
-        validate_session_payload(loaded_dicts)
+    with pytest.raises(ValueError,match=r"index 1"):
+        load_sessions(str(path))  # Expecting a ValueError due to the malformed data
 
    

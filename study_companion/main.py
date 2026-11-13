@@ -64,7 +64,7 @@ def load_sessions(filename: str) -> list[StudySession]:
                         validate_session_payload(each_dict)
                         sessions.append(StudySession.from_dict(each_dict))
                     except (KeyError, ValueError) as e:
-                        raise ValueError(f"Session at index is invalid {e}") from e
+                        raise ValueError(f"Session at index {i} is invalid {e}") from e
 
                 return sessions
         except (FileNotFoundError, json.JSONDecodeError):

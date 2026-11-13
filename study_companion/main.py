@@ -57,7 +57,15 @@ def load_sessions(filename: str) -> list[StudySession]:
         try:
             with open(filename, "r") as file:
                 list_dicts = json.load(file)
-                sessions = [StudySession.from_dict(each_dict) for each_dict in list_dicts]
+
+                sessions = []
+                for i, each_dict in enumerate(list_dicts):
+                    try:
+                        validate_session_payload(each_dict)
+                        sessions.append(StudySession.from_dict(each_dict))
+                    except (KeyError, ValueError) as e:
+                        raise ValueError(f"Session at index is invalid {e}") from e
+
                 return sessions
         except (FileNotFoundError, json.JSONDecodeError):
             return []

@@ -51,7 +51,7 @@ def test_load_sessions_raises_value_error_naming_bad_session (tmp_path):
     path.write_text(json.dumps(malformed_data))
     
 
-    with pytest.raises(ValueError,match=r"index 1"):
+    with pytest.raises(ValueError,match=r"\bindex 1\b"):
         load_sessions(str(path))  # Expecting a ValueError due to the malformed data
 
    

@@ -1,5 +1,6 @@
 import pytest
 import json
+import re
 from study_companion.main import QuizQuestion, StudySession, save_sessions, load_sessions, validate_session_payload
 
 
@@ -54,4 +55,10 @@ def test_load_sessions_raises_value_error_naming_bad_session (tmp_path):
     with pytest.raises(ValueError,match=r"\bindex 1\b"):
         load_sessions(str(path))  # Expecting a ValueError due to the malformed data
 
-   
+
+def test_save_sessions_raises_runtime_error_with_filename_on_os_error(tmp_path):
+    bad_path = str(tmp_path / "nonexistent_directory" / "storage.json")
+    expected_pattern = rf"{re.escape(bad_path)}"
+
+    with pytest.raises(RuntimeError, match=expected_pattern):
+        save_sessions([], bad_path)  # Expecting a RuntimeError due to the bad path

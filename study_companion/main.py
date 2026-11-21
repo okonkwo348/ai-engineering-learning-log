@@ -71,8 +71,13 @@ def load_sessions(filename: str) -> list[StudySession]:
             return []
 
 def save_sessions(sessions: list[StudySession], filename: str) -> None:
-    with open(filename, "w") as file:
-        json.dump([session.to_dict() for session in sessions], file)
+    try:
+        with open(filename, "w") as file:
+            json.dump([session.to_dict() for session in sessions], file)
+    except OSError as e:
+        logger.error("Failed to save sessions to %s: %s", filename, e)
+        raise RuntimeError(f"Failed to save sessions to {filename}: {e}") from e
+    
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

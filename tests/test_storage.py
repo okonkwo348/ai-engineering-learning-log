@@ -58,7 +58,7 @@ def test_load_sessions_raises_value_error_naming_bad_session (tmp_path):
 
 def test_save_sessions_raises_runtime_error_with_filename_on_os_error(tmp_path):
     bad_path = str(tmp_path / "nonexistent_directory" / "storage.json")
-    expected_pattern = rf"{re.escape(bad_path)}"
+    expected_pattern = rf"Failed to save sessions to {re.escape(bad_path)}(?::|$)"
 
     with pytest.raises(RuntimeError, match=expected_pattern):
         save_sessions([], bad_path)  # Expecting a RuntimeError due to the bad path

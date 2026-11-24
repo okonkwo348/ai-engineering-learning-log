@@ -148,7 +148,12 @@ def main() -> None:
             new_session = StudySession.from_dict(result)
             tasks = load_sessions("storage.json")
             tasks.append(new_session)
-            save_sessions(tasks, "storage.json")
+            try:
+                save_sessions(tasks, "storage.json")
+            except RuntimeError as e:
+                print(f"Could not save sessions: {e}")
+                logger.error(f"Failed to save session -> {e}")
+                continue
             print(">>> A new session created successfully !!!")
 
         elif input_var == "list":

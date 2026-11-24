@@ -1,5 +1,7 @@
 import re
 
+import pytest
+
 from study_companion import main
 
 
@@ -33,12 +35,6 @@ def test_menu_loop_prints_error_when_save_sessions_raises_runtime_error(monkeypa
     captured = capsys.readouterr()
     assert re.search(r"^Could not save sessions:", captured.out, flags=re.MULTILINE)
     assert "A new session created successfully" not in captured.out
-
-import re
-import pytest
-
-from study_companion import main
-
 
 @pytest.mark.parametrize(
     "command_inputs",

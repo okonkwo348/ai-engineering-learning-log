@@ -146,8 +146,15 @@ def main() -> None:
                 continue
 
             new_session = StudySession.from_dict(result)
-            tasks = load_sessions("storage.json")
+            try:
+                tasks = load_sessions("storage.json")
+            except ValueError as e:
+                print(f"Could not load sessions: {e}")
+                logger.error(f"Failed to load sessions -> {e}")
+                continue
+
             tasks.append(new_session)
+
             try:
                 save_sessions(tasks, "storage.json")
             except RuntimeError as e:
@@ -157,13 +164,25 @@ def main() -> None:
             print(">>> A new session created successfully !!!")
 
         elif input_var == "list":
-            total_session = load_sessions("storage.json")
+            try:
+                total_session = load_sessions("storage.json")
+            except ValueError as e:
+                print(f"Could not load sessions: {e}")
+                logger.error(f"Failed to load sessions -> {e}")
+                continue
+
             for session in total_session:
                 print(str(session))
 
         elif input_var == "view":
             title_input = input("What do you want to view? >")
-            tasks = load_sessions("storage.json")
+            try:
+                tasks = load_sessions("storage.json")
+            except ValueError as e:
+                print(f"Could not load sessions: {e}")
+                logger.error(f"Failed to load sessions -> {e}")
+                continue
+
             similar_search = []
 
             for session in tasks:

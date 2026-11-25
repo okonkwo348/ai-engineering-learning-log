@@ -62,3 +62,11 @@ def test_save_sessions_raises_runtime_error_with_filename_on_os_error(tmp_path):
 
     with pytest.raises(RuntimeError, match=expected_pattern):
         save_sessions([], bad_path)  # Expecting a RuntimeError due to the bad path
+
+
+def test_load_sessions_raises_on_truncated_json(tmp_path):
+    truncated_file = tmp_path / "storage.json"
+    truncated_file.write_text('[{"title": "Partial entry"', encoding="utf-8")
+
+    with pytest.raises(json.JSONDecodeError):
+        load_sessions(str(truncated_file))

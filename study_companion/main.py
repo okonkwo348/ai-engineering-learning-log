@@ -67,7 +67,7 @@ def load_sessions(filename: str) -> list[StudySession]:
                         raise ValueError(f"Session at index {i} is invalid {e}") from e
 
                 return sessions
-        except (FileNotFoundError, json.JSONDecodeError):
+        except (FileNotFoundError):
             return []
 
 def save_sessions(sessions: list[StudySession], filename: str) -> None:
